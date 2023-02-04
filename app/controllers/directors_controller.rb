@@ -23,4 +23,13 @@ class DirectorsController < ApplicationController
     render ({ :template => "director_templates/youngest.html.erb"})
   end
 
+  def director_details
+
+    the_id = params.fetch("an_id")
+    @the_director = Director.where({ :id => the_id }).at(0)
+    @filmography = Movie.where({ :director_id => @the_director })
+    
+    render ({ :template => "director_templates/director_details.html.erb"})
+  end
+
 end
